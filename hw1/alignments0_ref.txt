@@ -1,0 +1,5 @@
+ACA -1
+GTA 2 6
+CGT 1
+ACG 0
+AGG 4
