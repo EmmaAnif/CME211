@@ -1,1 +1,65 @@
-This is hw1 in CME211
+This is the README file for hw1 in CME211
+
+PART 2
+#command line log of using generatedata.py
+
+$ python3 generatedata.py 1000 600 50 "ref_1.txt" "reads_1.txt"
+reference length: 1000
+number reads: 60
+read length: 50
+aligns 0: 0.1433...34
+aligns 1: 0.7383...33
+aligns 2: 0.1182...33
+$ python3 generatedata.py 10000 6000 50 "ref_2.txt" "reads_2.txt"
+reference length: 10000
+number reads: 6000
+read length: 50
+aligns 0: 0.1476...67
+aligns 1: 0.7473...33
+aligns 2: 0.105
+$ python3 generatedata.py 100000 60000 50 "ref_3.txt" reads_3.txt"
+reference length: 100000
+number reads: 60000
+read length: 50
+aligns 0: 0.1512
+aligns 1: 0.7492
+aligns 2: 0.0996
+
+#answers to questions asked regarding generatedata.py
+- The test data covered the scope of all possible cases of reads which includes the reads that do not align at all, those that align once, and those that align more than once. If the code works for the handwritten data, it will always work correctly for other data sets as long as they are valid reads (by that I mean strings with length less than the reference length).
+
+- I don't expect an exact distribution because I used the random method which is not exact hence, the probability that my guess <= 0.75 is not exactly 75%.
+
+- I spent about 3 hours on this part of the assignment.
+
+PART 3
+#command line log of using processdata.py
+
+$ python3 processdata.py ref_1.txt reads_1.txt alig_1.txt
+reference length: 1000
+number reads: 600
+aligns0: 0.1433...34
+aligns1: 0.7366...67
+aligns2: 0.12
+elapsed time: 0.031423
+$ python3 processdata.py ref_2.txt reads_2.txt align_2.txt
+reference length: 10000
+number reads: 6000
+aligns0: 0.14766...67
+aligns1: 0.74716...66
+aligns2: 0.10516...67
+elapsed time: 0.330914
+$ python3 processdata.py ref_3.txt reads_3.txt align_3.txt
+reference length: 100000
+number reads: 60000
+aligns0: 0.1512
+aligns1: 0.74916...66
+aligns2: 0.09963...34
+elapsed time: 25.217520
+
+#answers to questions asked regarding processdata.py
+- The distribution of reads that align zero, one and two times do not always exactly match the distributions I computed while creating the datasets because there's a chance that a variable that I chose to align once actually aligned somewhere else beyond my control which cannot be captured by generatedata.py but will be captured by processdata.py
+
+- As the reference length increases, the timing increases much more. For every 10x increase in reference length, the timing increases 10 times more than the increase of the previous step. Put differently, a human genome of 1*(10^9) reference length will take approximately 3*(10^19) seconds using this program. This shows that it is not feasible to actually analyze all the data for a human using this program.
+
+- I spent about 5 hours on this part of the assignment.
