@@ -9,3 +9,7 @@ if __name__ == "__main__":
     # echo arguments
     for i in range(len(sys.argv)):
         print(i,sys.argv[i])
+
+#--functionality_0
+#--Passed all tests!
+#--END
