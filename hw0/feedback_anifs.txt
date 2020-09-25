@@ -1,0 +1,37 @@
+FILE:          echo_commands.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+FILE:          hello_world.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: gbescos, GitHub ID guibescos
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.
