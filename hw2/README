@@ -1,1 +1,50 @@
-This is the readme fil for hw2.
+This is the readme file for hw2.
+
+Part 1
+
+Q1: I considered the given specification of 10 users and 3 movies with a 
+rating scale that goes from 1-5. I made the test data in such a way that 
+I could easily tell the expected similarity coefficient.
+I also considered that since the mean was subtracted while calculating the
+coefficient, having a constant rating would result in a similarity of 0
+so I ensured to vary the ratings.
+
+Q2: I captured the fact that the data was tab separated and each data was 
+on a new line
+
+Q3: I have a reference solution. I made movies 1 and 2 have a similarity 
+of 1 by choosing the same ratings for them and I made movies 2 and 3 have 
+a similarity of -1 by choosing opposite ratings for them.
+
+Part 2
+
+command line log:
+
+$ python3 similarity.py ml-100k/u.data similarities.txt
+Input MovieLens file: ml-100k/u.data
+Output file for similarity data: similarities.txt
+Read 100000 lines with total of 1682 movies and 943 users
+Computed similarities in 52.368 seconds
+
+First 10 lines of output similarity file:
+
+1 (885, 1.00, 6)
+2 (1056, 1.00, 5)
+3 (1081, 0.98, 5)
+4 (1473, 0.89, 5)
+5 (1050, 1.00, 5)
+6 (1017, 0.99, 5)
+7 (968, 1.00, 7)
+8 (590, 0.89, 6)
+9 (113, 1.00, 5)
+10 (493, 1.00, 8)
+
+Dcomposition in terms of functions:
+
+I created 3 functions to solve this problem: checkSimilar, loadMovies and
+compareMovies. The loadMovies function reads the input file and creates a
+dictionary that maps the movies to the users and ratings. The compareMovies 
+takes the dictionary from loadMovies to get the corresponding movie with 
+highest similarity and then writes the result to the output file. The 
+checkSimilar function is used within compareMovies to calculate the similarity 
+coefficient given two sets of ratings.
