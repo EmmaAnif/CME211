@@ -25,8 +25,12 @@ aligns 0: 0.1512
 aligns 1: 0.7492
 aligns 2: 0.0996
 
+#--documentation_0
+#--You should mitigate your answer. You might have made some implicit assumptions unknowingly when you wrote the test data. Furthermore, you don't know how your code will scale to bigger datasets.
+#--START
 #answers to questions asked regarding generatedata.py
 - The test data covered the scope of all possible cases of reads which includes the reads that do not align at all, those that align once, and those that align more than once. If the code works for the handwritten data, it will always work correctly for other data sets as long as they are valid reads (by that I mean strings with length less than the reference length).
+#--END
 
 - I don't expect an exact distribution because I used the random method which is not exact hence, the probability that my guess <= 0.75 is not exactly 75%.
 
@@ -60,6 +64,10 @@ elapsed time: 25.217520
 #answers to questions asked regarding processdata.py
 - The distribution of reads that align zero, one and two times do not always exactly match the distributions I computed while creating the datasets because there's a chance that a variable that I chose to align once actually aligned somewhere else beyond my control which cannot be captured by generatedata.py but will be captured by processdata.py
 
+#--documentation_1
+#--You should try and express the complexity of your program in terms of the variables of the problem. Your calculation is off. 
+#--START
 - As the reference length increases, the timing increases much more. For every 10x increase in reference length, the timing increases 10 times more than the increase of the previous step. Put differently, a human genome of 1*(10^9) reference length will take approximately 3*(10^19) seconds using this program. This shows that it is not feasible to actually analyze all the data for a human using this program.
+#--END
 
 - I spent about 5 hours on this part of the assignment.

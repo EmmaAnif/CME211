@@ -1,5 +1,9 @@
+#--style_0
+#--Imports should be done in lexicographic order
+#--START
 import sys
 import random
+#--END
 
 if __name__ == "__main__":
     #incorrect number of arguments, print usage message
@@ -72,7 +76,11 @@ if __name__ == "__main__":
         else: #read aligns twice
             safe_region = len(repeat) - read_len #to prevent read from going beyond the reference
             val = random.randint(1,safe_region)
+#--style_0
+#--watch out for long lines
+#--START
             start_index = three_quat_length - 1  + val # -1 is used to prevent slicing from going out of bounds in worst case
+#--END
             read = ref[start_index: start_index+read_len]
             aligns2 += 1
         read_list.append(read)
