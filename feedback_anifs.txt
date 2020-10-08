@@ -1,0 +1,55 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-good writeup
+
+                  
+
+
+--------------------------
+FILE:          similarity.py
+FUNCTIONALITY  
+
+COMMENTS:
+-TypeError: unorderable types: int() < str() when I actually passed
+-in a threshold as the last argument
+
+RELEVANT CODE:
+if len(common_users) < thresh: #check for threshold cut off
+                similarity = 0
+
+POINTS DEDUCTED: 2
+
+
+--------------------------
+FILE:          similarity.py
+FUNCTIONALITY  
+
+COMMENTS:
+-we have performed stress-testing against your generated output with autograder
+-however, your output does not match our true solution for over half the tests
+-for example, for movie id 678, We should have found a similarity rating of 0.93 but instead,
+-you reported the most-similar movie to have rating 0.94.
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: chkao831, GitHub ID chkao831
+###################################################
+
+FUNCTIONALITY SCORE:                     --
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

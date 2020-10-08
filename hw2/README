@@ -48,3 +48,7 @@ takes the dictionary from loadMovies to get the corresponding movie with
 highest similarity and then writes the result to the output file. The 
 checkSimilar function is used within compareMovies to calculate the similarity 
 coefficient given two sets of ratings.
+
+#--documentation_0
+#--good writeup
+#--END

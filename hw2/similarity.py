@@ -67,8 +67,13 @@ def compareMovies(movie_dict,thresh,outFile):
                 continue
 
             common_users = user_i_set & user_j_set
+            #--functionality_2
+            #--TypeError: unorderable types: int() < str() when I actually passed
+            #--in a threshold as the last argument
+            #--START
             if len(common_users) < thresh: #check for threshold cut off
                 similarity = 0
+            #--END
             else:
                 #get ratings of common users for movies i and j
                 rate_ij = [(movie_dict[cL_i][user],movie_dict[cL_j][user]) \
@@ -147,3 +152,12 @@ if __name__ == "__main__":
     elapsed_time = final_time - init_time
     
     print("Computed similarities in {} seconds".format(round(elapsed_time,3)))
+
+#--functionality_1
+#--we have performed stress-testing against your generated output with autograder
+#--however, your output does not match our true solution for over half the tests
+#--for example, for movie id 678, We should have found a similarity rating of 0.93 but instead, 
+#--you reported the most-similar movie to have rating 0.94.
+#--END
+
+
