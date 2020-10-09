@@ -1,0 +1,28 @@
+This is the readme file for hw3
+
+#Description of code design
+The Airfoil class uses object oriented programming concepts to process data
+associated with an airfoil.
+The class has 6 methods that are used to interact with the input directory
+and calling print on an instance of the class would return information
+about the the lift coefficient and stagnation point for each angle of attack.
+
+Key OOP concepts used include abstraction, decomposition and encapsulation.
+Abstraction - An instance of the Airfoil class hides all the messy details 
+about the data points and pressure coefficient while simply presenting the 
+required information to the user.
+Decomposition - The Airfoil class breaks down the long process of getting 
+lift coefficient and stagnation point into smaller chunks using 6 different 
+methods: __init__, load_alpha, calc_cl, load_xy, stag_pt and __str__
+Encapsulation - The Airfoil class bundles within it all the data associiated 
+with the class and methods that are used to interact with the data. This 
+ensures that the main program is clean and easily readable.
+
+#Description of error checking and exception generation
+When an instance of the class is created, it checks to see if the input
+directory exists otherwise, it returns an error. It also checks to see if xy
+data points and pressure coefficient for each angle of attack exists otherwise,
+it returns an error.
+It raises an exception if it cannot open the files provided or if the angle of
+attack used in naming the file is invalid (not a number).
+ 

@@ -21,16 +21,18 @@ class Airfoil:
             data directory")
         #store the files for each angle of attack
         ang_files = glob.glob(inputdir + "alpha*")
-        
-        self.ang_dict = {float(ang_file[len(inputdir)+5:-4]):ang_file \
-        for ang_file in ang_files} #dict that maps angles to corresponding file
+        try:
+            self.ang_dict = {float(ang_file[len(inputdir)+5:-4]):ang_file \
+            for ang_file in ang_files} #dict that maps angles to corr. files
+        except ValueError:
+            print("angle of attack needs to be a number")
         self.inputdir = inputdir #store the input directory
         self.ang_att = sorted(self.ang_dict.keys()) #sort the angles 
         self.panels = [] #initialize a list of panels
         self.chord = 0 #initialize chord length
         self.x_data = [] #initialize a list of x data
         self.y_data = [] #initialize a list of y data
-        self.cp_dict = {} #intialize dict that maps angles to list of cp values
+        self.cp_dict = {} #intialize dict that maps angles to list of Cp values
         self.cl_dict = {} #intiailize dict that maps angles to cl values
         self.stag_dict = {} #initialize dict that maps angles to stag. points
         
@@ -44,7 +46,7 @@ class Airfoil:
             with open(inputdir + "xy.dat") as f:
                 xy_list = f.readlines()
         except IOError:
-            print("Cannot open the <xy.dat> file")
+            print("cannot open the <xy.dat> file")
         del(xy_list[0]) #delete the header 
         len_xy = len(xy_list)
         #delete the newline character and store as (x,y) pair
@@ -63,14 +65,14 @@ class Airfoil:
         self.y_data = y_data
         
     def load_alpha(self):
-        """load each <alpha(angle).dat> file and store the cp values for each of them
+        """load each <alpha(angle).dat> file and store Cp values for each
         """
         for ang,ang_file in self.ang_dict.items():
             try:
                 with open(ang_file) as f:
                     cp_list = f.readlines()
             except IOError:
-                print("Cannot open the <alpha(angle).dat> file")
+                print("cannot open the <alpha(angle).dat> file")
             del(cp_list[0]) #delete the header
             #delete the newline character
             cp_list = [float(cp[:-1]) for cp in cp_list]
