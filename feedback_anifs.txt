@@ -19,7 +19,7 @@ RELEVANT CODE:
 if len(common_users) < thresh: #check for threshold cut off
                 similarity = 0
 
-POINTS DEDUCTED: 2
+POINTS DEDUCTED: 1
 
 
 --------------------------
@@ -41,7 +41,7 @@ GRADING TA
 SUNet ID: chkao831, GitHub ID chkao831
 ###################################################
 
-FUNCTIONALITY SCORE:                     --
+FUNCTIONALITY SCORE:                      -
 ###################################################
 
 DESIGN SCORE:                             +

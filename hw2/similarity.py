@@ -67,7 +67,7 @@ def compareMovies(movie_dict,thresh,outFile):
                 continue
 
             common_users = user_i_set & user_j_set
-            #--functionality_2
+            #--functionality_1
             #--TypeError: unorderable types: int() < str() when I actually passed
             #--in a threshold as the last argument
             #--START
