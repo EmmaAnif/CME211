@@ -1,0 +1,71 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-You should mitigate your answer. You might have made some implicit assumptions unknowingly when you wrote the test data. Furthermore, you don't know how your code will scale to bigger datasets.
+
+RELEVANT CODE:
+#answers to questions asked regarding generatedata.py
+- The test data covered the scope of all possible cases of reads which includes the reads that do not align at all, those that align once, and those that align more than once. If the code works for the handwritten data, it will always work correctly for other data sets as long as they are valid reads (by that I mean strings with length less than the reference length).
+
+                  
+
+
+--------------------------
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-You should try and express the complexity of your program in terms of the variables of the problem. Your calculation is off.
+
+RELEVANT CODE:
+- As the reference length increases, the timing increases much more. For every 10x increase in reference length, the timing increases 10 times more than the increase of the previous step. Put differently, a human genome of 1*(10^9) reference length will take approximately 3*(10^19) seconds using this program. This shows that it is not feasible to actually analyze all the data for a human using this program.
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          generatedata.py
+STYLE          
+
+COMMENTS:
+-Imports should be done in lexicographic order
+
+RELEVANT CODE:
+import sys
+import random
+
+                  
+
+
+--------------------------
+FILE:          generatedata.py
+STYLE          
+
+COMMENTS:
+-watch out for long lines
+
+RELEVANT CODE:
+start_index = three_quat_length - 1  + val # -1 is used to prevent slicing from going out of bounds in worst case
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: tommrvn, GitHub ID tom-morvan
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                           ok
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.
