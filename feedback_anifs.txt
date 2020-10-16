@@ -1,0 +1,157 @@
+FILE:          README
+DOCUMENTATION  
+
+COMMENTS:
+-Good job!
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+FUNCTIONALITY  
+
+COMMENTS:
+-This doesn't work if I provide the directory without a "/"
+-ex: python3 main.py naca0012
+
+RELEVANT CODE:
+if glob.glob(inputdir + "xy*") == [] or \
+         glob.glob(inputdir + "alpha*") == []:
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+FUNCTIONALITY  
+
+COMMENTS:
+-You should probably raise an exception here, otherwise the code is going to keep going and fail
+
+RELEVANT CODE:
+except IOError:
+            print("cannot open the <xy.dat> file")
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+DESIGN         
+
+COMMENTS:
+-Really ugly and potentially really slow
+-When you delete and element off the list, all the other elements need to be moved in memory
+-It is much better to just start the for loop at 1
+
+RELEVANT CODE:
+del(xy_list[0]) #delete the header
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+STYLE          
+
+COMMENTS:
+-Don't use semi-colons in python
+-Better to do x_data, y_data = [],[]
+
+RELEVANT CODE:
+x_data = []; y_data = []
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          airfoil.py
+STYLE          
+
+COMMENTS:
+-Weird trailing space at the end of the next line
+
+RELEVANT CODE:
+y_data.append(float(y))
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+DESIGN         
+
+COMMENTS:
+-This line split hinders readability a lot
+
+RELEVANT CODE:
+xy_panels = [(x_data[j+1]-x_data[j],y_data[j+1]-y_data[j]) \
+        for j in range(len_xy) if j < len_xy-1] #definition of panels: (dx,dy)
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+DESIGN         
+
+COMMENTS:
+-Slightly inefficient before you loop twice over the list by doing this
+
+RELEVANT CODE:
+stag_cp = max(cp_list) #stagnation point corresponds to max Cp
+            panel_num = cp_list.index(stag_cp)
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Here you assume that inputdir has a specific form, but what if inputdir is a long path
+
+RELEVANT CODE:
+print("Test case: {} {}\n".format(inputdir[:4].upper(),inputdir[4:-1]))
+
+                  
+
+
+--------------------------
+FILE:          airfoil.py
+DESIGN         
+
+COMMENTS:
+-This is really strange: you shouldn't print in this method
+-but instead you should return a string containing everything that you want to print
+
+RELEVANT CODE:
+print("{:6.2f}".format(angle),end = ' ')
+            print("{:9.4f}".format(cl),end = ' ')
+            print("    ({:5.4f},".format(stag_pt_x),end = ' ')
+            print("{:7.4f})".format(stag_pt_y),end = ' ')
+            print("{:6.4f}".format(stag_cp))
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: gbescos, GitHub ID guibescos
+###################################################
+
+FUNCTIONALITY SCORE:                      -
+###################################################
+
+DESIGN SCORE:                             -
+###################################################
+
+STYLE SCORE:                             ok
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

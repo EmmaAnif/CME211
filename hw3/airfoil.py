@@ -15,8 +15,13 @@ class Airfoil:
         if not os.path.exists(inputdir): #check if input direcotory exists
             raise RuntimeError("input directory does not exist")
         #check if <xy.dat> and <alpha.dat> files exist
+#--functionality_1
+#--This doesn't work if I provide the directory without a "/"
+#-- ex: python3 main.py naca0012
+#--START
         if glob.glob(inputdir + "xy*") == [] or \
          glob.glob(inputdir + "alpha*") == []: 
+#--END
             raise RuntimeError("required data files cannot be found in the \
             data directory")
         #store the files for each angle of attack
@@ -45,20 +50,43 @@ class Airfoil:
         try:
             with open(inputdir + "xy.dat") as f:
                 xy_list = f.readlines()
+#--functionality_1
+#--You should probably raise an exception here, otherwise the code is going to keep going and fail
+#--START
         except IOError:
             print("cannot open the <xy.dat> file")
-        del(xy_list[0]) #delete the header 
+#--END
+
+#--design_1
+#--Really ugly and potentially really slow
+#--When you delete and element off the list, all the other elements need to be moved in memory
+#--It is much better to just start the for loop at 1
+#--START
+        del(xy_list[0]) #delete the header
+#--END
         len_xy = len(xy_list)
         #delete the newline character and store as (x,y) pair
         xy_list = [tuple(xy_list[j][:-1].split()) for j in range(len_xy)]
+#--style_1
+#--Don't use semi-colons in python
+#--Better to do x_data, y_data = [],[]
+#--START
         x_data = []; y_data = []
+#--END
         for x,y in xy_list:
             x_data.append(float(x))
+#--style_0
+#--Weird trailing space at the end of the next line
+#--START
             y_data.append(float(y)) 
+#--END
         chord = max(x_data) - min(x_data)
+#--design_0
+#--This line split hinders readability a lot
+#--START
         xy_panels = [(x_data[j+1]-x_data[j],y_data[j+1]-y_data[j]) \
         for j in range(len_xy) if j < len_xy-1] #definition of panels: (dx,dy)
-        
+#--END
         self.panels = xy_panels
         self.chord = chord
         self.x_data = x_data
@@ -101,8 +129,12 @@ class Airfoil:
         """identify the stagnation point for each angle of attack
         """
         for ang,cp_list in self.cp_dict.items():
+#--design_0
+#--Slightly inefficient before you loop twice over the list by doing this
+#--START
             stag_cp = max(cp_list) #stagnation point corresponds to max Cp
             panel_num = cp_list.index(stag_cp)
+#--END
             x_dat = self.x_data; y_dat = self.y_data
             #stagnation point is defined as middle of "stagnation panel"
             stag_x = (x_dat[panel_num] + x_dat[panel_num+1])/2
@@ -116,7 +148,11 @@ class Airfoil:
         inputdir = self.inputdir
         
         #header
+#--functionality_0
+#--Here you assume that inputdir has a specific form, but what if inputdir is a long path
+#--START
         print("Test case: {} {}\n".format(inputdir[:4].upper(),inputdir[4:-1]))
+#--END
         print("{:^7}".format("alpha"),end = ' ')
         print("{:^9}".format("cl"),end = ' ')
         print("{:^30}".format("stagnation point"))
@@ -138,10 +174,14 @@ class Airfoil:
             stag_pt_y = self.stag_dict[ang][0][1]
             stag_cp = self.stag_dict[ang][1]
             angle = float(ang)
-            
+#--design_1
+#--This is really strange: you shouldn't print in this method
+#-- but instead you should return a string containing everything that you want to print
+#--START
             print("{:6.2f}".format(angle),end = ' ')
             print("{:9.4f}".format(cl),end = ' ')
             print("    ({:5.4f},".format(stag_pt_x),end = ' ')
             print("{:7.4f})".format(stag_pt_y),end = ' ')
             print("{:6.4f}".format(stag_cp))
+#--END
         return(' ') #ensures no error is generated

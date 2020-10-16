@@ -26,3 +26,6 @@ it returns an error.
 It raises an exception if it cannot open the files provided or if the angle of
 attack used in naming the file is invalid (not a number).
  
+#--documentation_0
+#--Good job!
+#--END
