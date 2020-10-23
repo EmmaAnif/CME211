@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{underscore}
+\begin{document}
+\noindent
+The Truss class is used for loading and analyzing a 2D truss using the method
+of joints.\\
+It has 4 methods: __init__, PlotGeometry, SolveTruss, __repr__\\
+\\
+__init__ takes 3 inputs: an instance of the class, joints files and beams
+files. It coverts these files to arrays suitable for use by other methods and
+it also extracts some relevant data such as number of joints, beams and
+rigid supports from the files. It has no return.\\
+\\
+PlotGeometry takes 2 inputs: an instance of the class and a plot filename. It
+creates a matplotlib plot of the 2D truss geometry and saves it with the plot
+filename given. It has no return.\\
+\\
+SolveTruss takes 1 input: an instance of the class. It analyzes the truss and
+solves for the reaction forces in each beam. It uses a csr matrix to store the
+equations as a sparse matrix. It has no return.\\
+\\
+__repr__ takes 1 input: an instance of the class. It returns a string
+representation of the reaction forces in each beam.\\
+\end{document}
