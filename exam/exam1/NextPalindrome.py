@@ -27,3 +27,16 @@ def NextPalindrome(pal):
         nextPal = leftPal+leftMidPal+midPal+rightMidPal+rightPal
         
     return nextPal
+
+#--functionality_0
+#--Passed all tests!
+#--END
+
+#--design_0
+#--Well designed!
+#--END
+
+#--style_0
+#--Good coding style!
+#--END
+
