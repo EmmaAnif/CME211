@@ -1,3 +1,6 @@
+#--grade
+#--100/100
+
 Language Choice
 1. Low level language because code needs to be optimized for performance
 2. Low level language because code needs to be optimized for performance
@@ -14,11 +17,7 @@ Data Types
 
 Loops
 1. for
-#--writeup_2
-#--It should be while loop because of the unknown number of alignments.
-#--START
 2. for
-#--END
 3. while
 4. for
 5. for
