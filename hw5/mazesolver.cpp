@@ -2,19 +2,22 @@
 #include <iostream>
 #include <string>
 
-#define ni 201
-#define nj 201
+#define ni 201 //number of rows of static array
+#define nj 201 //number of columns of static array
 
-enum direction{
+//enumeration of the four different possible directions
+enum dir{
     up,
     down,
     right,
     left
 };
 
-//Read the array values from maze1.txt file
+//function prototype
+bool checkSpace(enum dir check, enum dir *d, int arr[ni][nj], int *rp, int *cp); 
+
 int main(int argc, char *argv[]){
-    int a[ni][nj]= {0};
+    int arr[ni][nj]= {0}; //initialize static array with zeros
     
     //catch the case where insufficient arguments are provided
     if (argc < 3){
@@ -23,21 +26,23 @@ int main(int argc, char *argv[]){
         return 0;
     }
     
+    //save name of maze and solution files
     std::string maze_file = argv[1];
     std:: string solution_file = argv[2];
     
+    int nif,njf,lastRow;
+    
+    //open maze file
     std::ifstream f(maze_file);
-    std::ofstream g(solution_file);
 
-    if (f.is_open() and g.is_open()){
+    if (f.is_open()){
         //Read the size of the data and make sure storage is sufficient
-        int nif,njf;
         f >> nif >> njf;
         if (nif > ni or njf > nj){
             std::cout << "Not enough storage available" << std::endl;
             return 0; //quit the program
         }
-        int lastRow = nif - 1; //store the last row of Maze
+        lastRow = nif - 1; //store the last row of Maze
         
         //Read the data and populate the array
         int i_f,j_f;
@@ -45,136 +50,168 @@ int main(int argc, char *argv[]){
             for (int j = 0; j < njf; j++){
                 f >> i_f;
                 f >> j_f;
-                a[i_f][j_f] = 1;
-                //std::cout<<"a["<<i<<"]["<<j<<"] = "<<a[i][j]<<std::endl; 
+                arr[i_f][j_f] = 1; //a value of 1 in array shows presence of wall
             }
         }
         f.close();
+    }
+    else{
+        std::cout << "Failed to open maze file" << std::endl;
+        return 0;
+    }
+    
+    //open solution file
+    std::ofstream g(solution_file);
+    
+    if (g.is_open()){
         
         int row, col; //keep track of row and column
-        direction d = down; //initialize direction with down
+        dir d = down; //initialize direction with down
         row = 0; col = 0;
-        for (int j = 0; j < njf; j++){
-            if (a[0][j] == 0){
-                g << row << " " << j << std::endl;
+        for (int j = 0; j < njf; j++){ //find entrance to the maze
+            if (arr[0][j] == 0){
                 col = j;
+                g << row << " " << col << std::endl; //store in solution file
                 break;
             }
         }
-        int numIters = 0;
         while (1){ //while still in the maze
-            numIters++;
-            /*
-            if (numIters > 500){
-               std::cout << "Terrible Bug in code" << std::endl;
-               break;
-            }
-            */
 
-            switch (d)
+            switch (d) //check direction
             {
                 case down:
                 {
-                    if (a[row][col-1] == 0){ //check right
-                        g << row << " " << col - 1 << std::endl;
-                        col--; d = right;
+                    if (checkSpace(right,&d,arr,&row,&col)){ //check right
+                        g << row << " " << col << std::endl;
                     }
-                    else if (a[row+1][col] == 0){ //check down
-                        g << row + 1 << " " << col << std::endl;
-                        row++; d = down;
+                    else if (checkSpace(down,&d,arr,&row,&col)){ //check down
+                        g << row << " " << col << std::endl;
                     }
                     
-                    else if (a[row][col+1] == 0){ // check left
-                        g << row << " " << col + 1 << std::endl;
-                        col++; d = left;
+                    else if (checkSpace(left,&d,arr,&row,&col)){ // check left
+                        g << row << " " << col << std::endl;
                     }
                     else{ //go back up
-                        g << row - 1 << " " << col << std::endl;
-                        row--; d = up;
+                        checkSpace(up,&d,arr,&row,&col);
+                        g << row << " " << col << std::endl;
                     } 
                 }
-                std::cout << row << " " << col << std::endl;
                 break;
                 
                 case right:
                 { 
-                    if (a[row-1][col] == 0){ //check up
-                        g << row - 1 << " " << col << std::endl;
-                        row--; d = up;
+                    if (checkSpace(up,&d,arr,&row,&col)){ //check up
+                        g << row  << " " << col << std::endl;
                     }
-                    else if (a[row][col-1] == 0){ //check right
-                        g << row << " " << col - 1 << std::endl;
-                        col--; d = right;
+                    else if (checkSpace(right,&d,arr,&row,&col)){ //check right
+                        g << row << " " << col  << std::endl;
                     }
                     
-                    else if (a[row+1][col] == 0){ //check down
-                        g << row + 1 << " " << col << std::endl;
-                        row++; d = down;
+                    else if (checkSpace(down,&d,arr,&row,&col)){ //check down
+                        g << row << " " << col << std::endl;
                     }
                     else{ // go back left
-                        g << row << " " << col + 1 << std::endl;
-                        col++; d = left;
+                        checkSpace(left,&d,arr,&row,&col);
+                        g << row << " " << col << std::endl;
                     }
                 }
-                std::cout << row << " " << col << std::endl;
                 break;
                 
                 case up:
                 {
-                    if (a[row][col+1] == 0){ // check left
-                        g << row << " " << col + 1 << std::endl;
-                        col++; d = left;
+                    if (checkSpace(left,&d,arr,&row,&col)){ // check left
+                        g << row << " " << col << std::endl;
                     }
-                    else if (a[row-1][col] == 0){ //check up
-                        g << row - 1 << " " << col << std::endl;
-                        row--; d = up;
+                    else if (checkSpace(up,&d,arr,&row,&col)){ //check up
+                        g << row << " " << col << std::endl;
                     }
                     
-                    else if (a[row][col-1] == 0){ //check right
-                        g << row << " " << col - 1 << std::endl;
-                        col--; d = right;
+                    else if (checkSpace(right,&d,arr,&row,&col)){ //check right
+                        g << row << " " << col << std::endl;
                     }
                     else{ //go back down
-                        g << row + 1 << " " << col << std::endl;
-                        row++; d = down;
+                        checkSpace(down,&d,arr,&row,&col);
+                        g << row << " " << col << std::endl;
                     }
                 }
-                std::cout << row << " " << col << std::endl;
                 break;
                 
                 case left:
                 {
-                    if (a[row+1][col] == 0){ //check down
-                        g << row + 1 << " " << col << std::endl;
-                        row++; d = down;
+                    if (checkSpace(down,&d,arr,&row,&col)){ //check down
+                        g << row << " " << col << std::endl;
                     }
-                    else if (a[row][col+1] == 0){ // check left
-                        g << row << " " << col + 1 << std::endl;
-                        col++; d = left;
+                    else if (checkSpace(left,&d,arr,&row,&col)){ // check left
+                        g << row << " " << col << std::endl;
                     }
                     
-                    else if (a[row-1][col] == 0){ //check up
-                        g << row - 1 << " " << col << std::endl;
-                        row--; d = up;
+                    else if (checkSpace(up,&d,arr,&row,&col)){ //check up
+                        g << row << " " << col << std::endl;
                     }
                     else{ //go back right
-                        g << row << " " << col - 1 << std::endl;
-                        col--; d = right;
+                        checkSpace(right,&d,arr,&row,&col);
+                        g << row << " " << col << std::endl;
                     }
                 }
-                std::cout << row << " " << col << std::endl;
                 break;
                 
             }
-            if (row == lastRow){
-                std::cout << "Got out of Maze!" << std::endl;
+            if (row == lastRow){ //have gotten to the exit of the maze
                 break;
             }   
         }
         g.close();
     }
     else{
-        std::cout << "Failed to open files" << std::endl;
+        std::cout << "Failed to open solution file" << std::endl;
     }
     return 0;
+}
+
+/*
+checkSpace
+
+Returns True if there is a space in the direction checked and False otherwise
+
+Input: direction checked 
+        pointer to current direction
+        pointer to array storing maze
+        pointer to row of array
+        pointer to col of array
+        
+Output: modifies row, col and current direction to keep track of position in maze
+*/
+
+bool checkSpace(enum dir check, enum dir *d, int arr[ni][nj], int *rp, int *cp){
+    switch (check)
+    {
+        case down:{
+            if (arr[*rp + 1][*cp] == 0){ //check for space in maze
+                (*rp)++; *d = down; //update row and current direction in place
+                return 1;
+            }
+        }
+        break; 
+        case up:{
+            if (arr[*rp - 1][*cp] == 0){ //check for space in maze
+                (*rp)--; *d = up;
+                return 1;
+            }
+        }
+        break; 
+        case right:{
+            if (arr[*rp][*cp-1] == 0){ //check for space in maze
+                (*cp)--; *d = right; //update column and current direciton in place
+                return 1;
+            }
+        }
+        break; 
+        case left:{
+            if (arr[*rp][*cp + 1] == 0){ //check for space in maize
+                (*cp)++; *d = left;
+                return 1;
+            }
+        }
+    } 
+    return 0; //this means there was no space in the direction checked
 }
