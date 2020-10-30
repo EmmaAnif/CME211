@@ -15,4 +15,5 @@ Summary of Code verification with checksoln.py
 The program reads the maze file and stores it in a numpy array with 1 showing 
 presence of wall while 0 shows space.
 It then reads the solution file and checks that there are no conflicting values 
-where a solution path goes through a wall.
+where a solution path goes through a wall. It also checks that each position change 
+is vaid and that maze was entered at the first row and left at the last row.
