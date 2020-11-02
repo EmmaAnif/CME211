@@ -1,0 +1,47 @@
+FILE:          README.tex
+DOCUMENTATION  
+
+COMMENTS:
+-it would be great if you could incorporate more content detail next time~
+
+                  
+
+
+--------------------------
+FILE:          truss.py
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+FILE:          truss.py
+DESIGN         
+
+COMMENTS:
+-very nice and neat OOP design!
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: chkao831, GitHub ID chkao831
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

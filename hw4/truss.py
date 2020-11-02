@@ -142,3 +142,12 @@ class Truss:
         for i in range(self.nBeams):
             ret_val += "{:>5d}{:>11.3f}\n".format(i+1,beam_forces[i])
         return ret_val
+
+#--functionality_0
+#--Passed all tests!
+#--END
+
+#--design_0
+#--very nice and neat OOP design!
+#--END
+
