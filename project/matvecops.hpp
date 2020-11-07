@@ -1,13 +1,20 @@
 #ifndef MATVECOPS_HPP
 #define MATVECOPS_HPP
 
-//Functions that perform common matrix vector operations that occur in the 
-//CG algorithm
-
 #include <cmath>
 #include <iostream>
 #include <numeric>
 #include <vector>
+
+/******************************************************************************
+Functions that perform common matrix vector operations that occur in the 
+CG algorithm
+* L2norm
+* dotProduct
+* matVecProduct
+* scalVecProduct
+* sum2Vec
+******************************************************************************/
 
 //function prototypes
 double L2norm(const std::vector<double> &r_n);

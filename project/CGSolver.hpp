@@ -11,8 +11,7 @@
  * is provided in x, and the solver runs a maximum number of iterations
  * equal to the size of the linear system.  Function returns the
  * number of iterations to converge the solution to the specified
- * tolerance, or -1 if the solver did not converge.
- */
+ * tolerance, or -1 if the solver did not converge.*/
 
 int CGSolver(std::vector<double> &val,
              std::vector<int>    &row_ptr,
