@@ -4,23 +4,25 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex}
 
-\begin{algorithm}
+\begin{algorithm}[H]
  \SetAlgoLined
- $initialize u_0$\;
- $r_0 = b - A u_0$\;
- $L2normr0 = L2norm(r_0$)\;
+ \KwData{a CSR matrix, a vector, a guess of the solution, tolerance}
+ \KwResult{solution of a CSR matrix vector equation}
+ initialize $u_0$\;
+ $r_0 = b - A$ $u_0$\;
+ $L2normr0 = L2norm(r_0)$\;
  $p_0 = r_0$\;
  $niter = 0$\;
  \While{$(niter < nitermax)$}{
-  $niter = niter + 1$\;
-  $alpha = (r_n^T r_n)/(p_n^T A p_n)$\;
-  $u_{n+1} = u_n + alpha_n p_n$\;
-  $r_{n+1} = r_n - alpha_n A p_n$\;
+  niter = niter + 1\;
+  $alpha = (r_n^T$ $r_n)/(p_n^T$ $A$ $p_n)$\;
+  $u_{n+1} = u_n + alpha_n$ $p_n$\;
+  $r_{n+1} = r_n - alpha_n$ $A$ $p_n$\;
   \If{($L2normr/L2norm0 < threshold)$}{
    break\;
   }
-  $beta_n = (r_{n+1}^T r{n+1})/(r_n^T r_n)$\;
-  $p_{n+1} = r{n+1} + beta_n p_n$\;
+  $beta_n = (r_{n+1}^T$ $r_{n+1})/(r_n^T$ $r_n)$\;
+  $p_{n+1} = r_{n+1} + beta_n$ $p_n$\;
  }
  \caption{Conjugate Gradient pseudo-code}
 \end{algorithm}
