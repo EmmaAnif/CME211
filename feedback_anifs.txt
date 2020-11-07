@@ -1,0 +1,87 @@
+FILE:          checksoln.py
+DESIGN         
+
+COMMENTS:
+-Code not included in a __main__
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          checksoln.py
+DESIGN         
+
+COMMENTS:
+-Forgot to check that a move is actually made,
+-and that the player doesn't stay at the same
+-place.
+
+RELEVANT CODE:
+#check that one position step was taken at a time
+try:
+    for i in range(len(solution_list)-1):
+        if abs((row_list[i+1] - row_list[i])) > 1 and \
+            abs((col_list[i+1] - col_list[i])) > 1:
+            checkVal = False
+            break
+except IndexError:
+    checkVal = False
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          mazesolver.cpp
+STYLE          
+
+COMMENTS:
+-A while loop would be more apporpriate and would ensure that you read
+-the whole file
+
+RELEVANT CODE:
+//Read the data and populate the array
+        int i_f,j_f;
+        for (int i = 0; i < nif; i++){
+            for (int j = 0; j < njf; j++){
+                f >> i_f;
+                f >> j_f;
+                arr[i_f][j_f] = 1; //a value of 1 in array shows presence of wall
+            }
+        }
+
+                  
+
+
+--------------------------
+FILE:          mazesolver.cpp
+STYLE          
+
+COMMENTS:
+-This should be your condition in for the while loop
+
+RELEVANT CODE:
+if (row == lastRow){ //have gotten to the exit of the maze
+                break;
+            }
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: tommrvn, GitHub ID tom-morvan
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             -
+###################################################
+
+STYLE SCORE:                             ok
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

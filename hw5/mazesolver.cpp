@@ -43,7 +43,11 @@ int main(int argc, char *argv[]){
             return 0; //quit the program
         }
         lastRow = nif - 1; //store the last row of Maze
-        
+
+//--style_0
+//--A while loop would be more apporpriate and would ensure that you read
+//--the whole file
+//--START        
         //Read the data and populate the array
         int i_f,j_f;
         for (int i = 0; i < nif; i++){
@@ -53,6 +57,7 @@ int main(int argc, char *argv[]){
                 arr[i_f][j_f] = 1; //a value of 1 in array shows presence of wall
             }
         }
+//--END
         f.close();
     }
     else{
@@ -156,10 +161,14 @@ int main(int argc, char *argv[]){
                 break;
                 
             }
+//--style_1
+//--This should be your condition in for the while loop
+//--START
             if (row == lastRow){ //have gotten to the exit of the maze
                 break;
             }   
-        }
+//--END  
+      }
         g.close();
     }
     else{

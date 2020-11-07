@@ -1,6 +1,10 @@
 import numpy as np
 import sys
 
+#--design_1
+#--Code not included in a __main__
+#--END
+
 #check for correct usage
 if len(sys.argv) < 3:
     print('Usage:')
@@ -59,7 +63,12 @@ try:
             break
 except IndexError: #check for indexError in numpy array
     checkVal = False
-    
+
+#--design_1
+#--Forgot to check that a move is actually made, 
+#--and that the player doesn't stay at the same
+#--place.
+#--START
 #check that one position step was taken at a time
 try:
     for i in range(len(solution_list)-1):
@@ -69,6 +78,7 @@ try:
             break
 except IndexError:
     checkVal = False
+#--END
         
 #check that bounds of the maze was not exceeded in solution file
 max_row,max_col = max(row_list),max(col_list)
