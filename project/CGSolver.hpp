@@ -2,6 +2,8 @@
 #define CGSOLVER_HPP
 
 #include <vector>
+#include <string>
+#include <fstream>
 
 /* Function that implements the CG algorithm for a linear system
  *
@@ -18,6 +20,8 @@ int CGSolver(std::vector<double> &val,
              std::vector<int>    &col_idx,
              std::vector<double> &b,
              std::vector<double> &x,
-             double              tol);
+             double              tol,
+             int                 n_rows_block,
+             std::string         soln_prefix);
 
 #endif /* CGSOLVER_HPP */

@@ -16,10 +16,14 @@ int CGSolver(std::vector<double> &val,
              std::vector<int>    &col_idx,
              std::vector<double> &b,
              std::vector<double> &x,
-             double              tol)
+             double              tol,
+             int                 n_rows_block,
+             std::string         soln_prefix)
 {
     //get number of rows
-    int n_row = (int)row_ptr.size() - 1; 
+    int n_row = (int)row_ptr.size() - 1;
+    //get size of b vector
+    int b_size = (int)b.size(); 
     
     //declare and initialize relevant variables
     int niter, nitermax = n_row, retVal = -1; //value for retval if no covergence
@@ -32,6 +36,8 @@ int CGSolver(std::vector<double> &val,
     L2n0 = L2norm(r); //get L2 norm of vector
     p = r;
     niter = 0;
+    int sol_num = 0; std::string outfile;// std::stringstream ss_num;
+    
     while (niter < nitermax){
         niter++;
         r_last = r;
@@ -46,11 +52,44 @@ int CGSolver(std::vector<double> &val,
         
         if ((L2n / L2n0) < tol){ //check if ratio of norms is within threshold
             retVal = niter; //return number of iterations for convergence
+            
+            //write last solution file
+            outfile = soln_prefix + std::to_string(sol_num) + ".txt";
+            std::ofstream f(outfile);
+            
+            if (f.is_open()){
+                for (int i = 0; i < b_size; i++){
+                    if (i % n_rows_block == 0)
+                        f << b[i] << " ";
+                    f << x[i] << " ";
+                    if (i % n_rows_block == n_rows_block-1)
+                        f << b[i] << std::endl;
+                }
+            }
+            f.close();
+            
             break;
         }
         
         beta = dotProduct(r,r)/dotProduct(r_last,r_last);
         p = sum2Vec(r,scalVecProduct(p,beta));
+        
+        //write solution file
+        if (niter % 10 == 1){
+            outfile = soln_prefix + std::to_string(sol_num++) + ".txt";
+            std::ofstream f(outfile);
+            
+            if (f.is_open()){
+                for (int i = 0; i < b_size; i++){
+                    if (i % n_rows_block == 0)
+                        f << b[i] << " ";
+                    f << x[i] << " ";
+                    if (i % n_rows_block == n_rows_block-1)
+                        f << b[i] << std::endl;
+                }
+            }
+            f.close();
+        }
     }
     return retVal;
 }
