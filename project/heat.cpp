@@ -1,7 +1,6 @@
 #include "heat.hpp"
-#include <stdexcept>
-#include <iostream>
 
+//declare relevant variables
 double length, width, h, Tc, Th;
 int nrows, ncols, m, n;
 
@@ -9,24 +8,25 @@ int nrows, ncols, m, n;
 int HeatEquation2D::Setup(std::string inputfile){
   std::ifstream f(inputfile);
   
+  //open the input file and store relevant data
   if (f.is_open()){
     f >> length >> width >> h;
     f >> Tc >> Th;
     f.close();
   }
   else{
-    std::cout << "Could not open " << inputfile << std::endl;
-    //spit out error message
+    throw std::runtime_error("cannot open " + inputfile);
   }
   
+  //store number of rows and columns
+  // m*n gives the dimension of the block tridiagonal matrix used to set up system
+  //m is the number of rows in each block of the matrix
+  //n is the number of block rows in the matrix
   nrows = (int)(width/h)+1;
   ncols = (int)(length/h)+1;
   m = nrows - 2, n = ncols - 1;
   
-  /*std::cout << "row: " << nrows << " col: " << ncols << std::endl;
-  std::cout << "Th: " << Th << " Tc: " << Tc << std::endl;*/
-  
-  //boundary conditions
+  //store boundary conditions
   double y, val;
   std::vector<double> Tc_arr;
   for (int i = 0; i < ncols; i++){
@@ -34,14 +34,8 @@ int HeatEquation2D::Setup(std::string inputfile){
     val = -Tc*(exp(-10*std::pow(y-(length/2),2))-2);
     Tc_arr.push_back(val);
   }
-  /*std::cout << "Tc_arr" << std::endl;
-  for (auto T: Tc_arr)
-    std::cout << T << std::endl;
-  
-  throw std::runtime_error(" ");*/
   
   //Build A matrix in COO format
-  //std::cout << "A Matrix in COO format" << std::endl;
   for (int i = 0; i < m*n; i++){
     for (int j = 0; j < m*n; j++){
       if (i == j) //diagonal
@@ -54,24 +48,17 @@ int HeatEquation2D::Setup(std::string inputfile){
         A.AddEntry(i, j, -1);
       else if (i-j == m) //sub sub diagonal
         A.AddEntry(i, j, -1);
-      else if (abs(i-j) == m*(n-1)) //periodic boudary 
+      else if (abs(i-j) == m*(n-1)) //periodic boudary condition
         A.AddEntry(i, j, -1);
-      /*else if (j-1 == m*(n-1)) //periodic boudary sup
-        A.AddEntry(i, j, -1);*/
     }
   }
- /* for (int i = 0; i < (int)A.a.size(); i++){
-    std::cout << A.i_idx[i] << "  " << A.j_idx[i] << "  " << A.a[i] << std::endl;
-  }
-  std::cout << std::endl << "m: " << m << " n: " << n << std::endl;
-  //throw std::runtime_error("wahala for bug wey still dey here oo");*/
   
-  //Build x vector
+  //Build b vector and initialize x vector with zeros
   int b_idx = 0; //initialize cold boundary index
   for (int i = 0; i < m*n; i++){
-    if (i%m == 0)
+    if (i%m == 0) //first row in block
       b.push_back(Th);
-    else if (i%m == m-1)
+    else if (i%m == m-1)//last row in block
       b.push_back(Tc_arr[b_idx++]);
     else
       b.push_back(0);
@@ -82,11 +69,15 @@ int HeatEquation2D::Setup(std::string inputfile){
   return 0;
 }
 
-/* Method to solve system using CGsolver */
 double tol = 1.e-5; int CGResult;
+
+/* Method to solve system using CGsolver */
 int HeatEquation2D::Solve(std::string soln_prefix){
-  COO2CSR(A.a, A.i_idx, A.j_idx);
+  //convert COO matrix to CSR matrix
+  A.ConvertToCSR();
+
   CGResult = CGSolver(A.a, A.i_idx, A.j_idx, b, x, tol, m, soln_prefix);
+  
   if (CGResult != -1){
     std::cout << "SUCCESS: CG solver converged in ";
     std::cout << CGResult << " iteration(s)." << std::endl;

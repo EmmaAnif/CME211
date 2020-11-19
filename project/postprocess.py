@@ -34,19 +34,20 @@ if __name__ == "__main__":
 
     #check to ensure that the solution file is valid
     try:
-        with open(solutionfile, 'r') as f:
-            f_nrows = len(f.readline().split())
-            f_ncols = len(f.readlines()) + 2
-            col = 0
-            for line in f.readlines():
-                T_arr[:,col] = [float(i) for i in line.split()]
-                col += 1
+        check = open(solutionfile,'r')
     except IOError:
         raise RuntimeError(solutionfile + " does not exist")
-    if f_nrows != nrows or f_ncols != ncols:
+    check_nrows = len(check.readline().split())
+    check_ncols = len(check.readlines()) + 2
+    if check_nrows != nrows or check_ncols != ncols:
         raise RuntimeError("Incompatible input and solution files")
-        
+    
     #store the discrete Temperature values in the pipe wall
+    with open(solutionfile, 'r') as f:
+        col = 0
+        for line in f.readlines():
+            T_arr[:,col] = [float(i) for i in line.split()]
+            col += 1
     T_arr[:,col] = T_arr[:,0]
     T_arr = np.flipud(T_arr)
 
@@ -66,10 +67,13 @@ if __name__ == "__main__":
     plt.ylabel("Y")
     plt.xlim((0,length))
     plt.ylim((-width,2*width))
+    plt.title("Input file processed: " + inputfile)
 
     #save plot
-    plt.savefig("pcolor.png")
+    figname = "pcolor" + inputfile[5] + ".png"
+    plt.savefig(figname)
     
     #commandline feedback
     print("Input file processed: " + inputfile)
     print("Mean Temperature: {}".format(round(T_mean,2)))
+    print("Output plot created: " + figname)

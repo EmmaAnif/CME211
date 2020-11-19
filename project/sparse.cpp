@@ -23,4 +23,3 @@ void SparseMatrix::ConvertToCSR(){
 std::vector<double> SparseMatrix::MulVec(std::vector<double> &vec){
   return matVecProduct(this->a,this->i_idx,this->j_idx,vec);
 }
-

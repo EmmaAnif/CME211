@@ -75,10 +75,13 @@ if __name__ == "__main__":
     plt.ylabel("Y")
     plt.xlim((0,length))
     plt.ylim((-width,2*width))
+    plt.title("Input file processed: " + inputfile)
 
     #create and save animation
     ani = animation.ArtistAnimation(fig,T_frames)
-    ani.save("pcolor.gif", writer = "imagemagick")
+    ani_name = "pcolor" + inputfile[5] + ".gif"
+    ani.save(ani_name, writer = "imagemagick")
 
     #commandline feedback
     print("Input file processed: " + inputfile)
+    print("Output animation created: " + ani_name)

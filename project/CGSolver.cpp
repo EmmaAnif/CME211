@@ -1,7 +1,7 @@
 #include "CGSolver.hpp"
 #include "matvecops.hpp"
 
-/* Function that implements the CG algorithm for a linear system
+/* Function that implements the CG algorithm for a tridiagonal block linear system
  *
  * Ax = b
  *
@@ -9,7 +9,11 @@
  * is provided in x, and the solver runs a maximum number of iterations
  * equal to the size of the linear system.  Function returns the
  * number of iterations to converge the solution to the specified
- * tolerance, or -1 if the solver did not converge.*/
+ * tolerance, or -1 if the solver did not converge. It also outputs a series
+ * of solution files containing the solution after every 10 iterations including
+ * the first and last iteration.
+ * n_rows_block is the number of rows in each block of the tridiagonal matrix
+ * soln_prefix is the solution prefix for the solution files*/
 
 int CGSolver(std::vector<double> &val,
              std::vector<int>    &row_ptr,
@@ -36,8 +40,9 @@ int CGSolver(std::vector<double> &val,
     L2n0 = L2norm(r); //get L2 norm of vector
     p = r;
     niter = 0;
-    int sol_num = 0; std::string outfile;// std::stringstream ss_num;
+    int sol_num = 0; std::string outfile;
     
+    //solve the equation using the CG algorithm
     while (niter < nitermax){
         niter++;
         r_last = r;
@@ -50,7 +55,8 @@ int CGSolver(std::vector<double> &val,
         
         L2n = L2norm(r);
         
-        if ((L2n / L2n0) < tol){ //check if ratio of norms is within threshold
+        //check if solution has converged
+        if ((L2n / L2n0) < tol){
             retVal = niter; //return number of iterations for convergence
             
             //write last solution file
@@ -59,13 +65,15 @@ int CGSolver(std::vector<double> &val,
             
             if (f.is_open()){
                 for (int i = 0; i < b_size; i++){
-                    if (i % n_rows_block == 0)
+                    if (i % n_rows_block == 0) //first row in block
                         f << b[i] << " ";
                     f << x[i] << " ";
-                    if (i % n_rows_block == n_rows_block-1)
+                    if (i % n_rows_block == n_rows_block-1) //last row in block
                         f << b[i] << std::endl;
                 }
             }
+            else
+                throw std::runtime_error("cannot open " + outfile);
             f.close();
             
             break;
@@ -74,7 +82,7 @@ int CGSolver(std::vector<double> &val,
         beta = dotProduct(r,r)/dotProduct(r_last,r_last);
         p = sum2Vec(r,scalVecProduct(p,beta));
         
-        //write solution file
+        //write solution file for intervals of 10 iterations
         if (niter % 10 == 1){
             outfile = soln_prefix + std::to_string(sol_num++) + ".txt";
             std::ofstream f(outfile);
@@ -88,6 +96,8 @@ int CGSolver(std::vector<double> &val,
                         f << b[i] << std::endl;
                 }
             }
+            else
+                throw std::runtime_error("cannot open " + outfile);
             f.close();
         }
     }

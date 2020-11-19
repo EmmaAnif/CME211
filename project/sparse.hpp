@@ -1,9 +1,9 @@
 #ifndef SPARSE_HPP
 #define SPARSE_HPP
 
-#include <vector>
-#include "matvecops.hpp"
 #include "COO2CSR.hpp"
+#include "matvecops.hpp"
+#include <vector>
 
 class SparseMatrix
 {
@@ -25,8 +25,6 @@ class SparseMatrix
 
     /* Method to perform sparse matrix vector multiplication using CSR formatted matrix */
     std::vector<double> MulVec(std::vector<double> &vec);
-
-    /* TODO: Add any additional public methods you need */
     
 };
 
