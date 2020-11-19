@@ -34,13 +34,14 @@ if __name__ == "__main__":
 
     #check to ensure that the solution file is valid
     try:
-        check = open(solutionfile,'r')
+        check_file = open(solutionfile,'r')
     except IOError:
         raise RuntimeError(solutionfile + " does not exist")
-    check_nrows = len(check.readline().split())
-    check_ncols = len(check.readlines()) + 2
+    check_nrows = len(check_file.readline().split())
+    check_ncols = len(check_file.readlines()) + 2 #+2 is because one line was already read
     if check_nrows != nrows or check_ncols != ncols:
         raise RuntimeError("Incompatible input and solution files")
+    check_file.close() #close if file is open
     
     #store the discrete Temperature values in the pipe wall
     with open(solutionfile, 'r') as f:
@@ -48,7 +49,7 @@ if __name__ == "__main__":
         for line in f.readlines():
             T_arr[:,col] = [float(i) for i in line.split()]
             col += 1
-    T_arr[:,col] = T_arr[:,0]
+    T_arr[:,col] = T_arr[:,0] #periodic boundary condition
     T_arr = np.flipud(T_arr)
 
     #store the mean temperature in the pipe wall

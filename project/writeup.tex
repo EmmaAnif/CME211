@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{algorithm2e}
+\usepackage{float}
 \usepackage{graphicx}
 
 \title{CME 211 PROJECT REPORT}
@@ -37,7 +38,7 @@ required to form the system of equations, solve the system and output results to
 The pseudocode for the algorithm for the CG Solver can be found below
 \cite{CME211:2020:ProjectPart1}.\\
 
-\begin{algorithm}[h]
+\begin{algorithm}[H]
  \SetAlgoLined
  \KwData{a CSR matrix, a vector, a guess of the solution, tolerance}
  \KwResult{solution of a CSR matrix vector equation}
@@ -84,7 +85,7 @@ the temperature distribution in the pipe for that solution file.
 create an animation of the temperature development during the CG Solve.
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{pcolor1.png}
 \caption{Example of pseudocolor plot with mean temperature isoline for input1.txt}

@@ -44,7 +44,7 @@ if __name__ == "__main__":
     except IOError:
         raise RuntimeError(solfile_prefix + " is not a valid solution prefix")
     check_nrows = len(check_file.readline().split())
-    check_ncols = len(check_file.readlines()) + 2
+    check_ncols = len(check_file.readlines()) + 2 #+2 because one line was already read
 
     if check_nrows != nrows or check_ncols != ncols:
         raise RuntimeError("Incompatible input and solution files")
