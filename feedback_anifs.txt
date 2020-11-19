@@ -1,0 +1,60 @@
+FILE:          CGSolver.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+FILE:          CGSolver.cpp
+DESIGN         
+
+COMMENTS:
+-Well designed!
+
+                  
+
+
+--------------------------
+FILE:          CGSolver.cpp
+DOCUMENTATION  
+
+COMMENTS:
+-good
+
+                  
+
+
+--------------------------
+FILE:          main.cpp
+STYLE          
+
+COMMENTS:
+-It should be g.precision(4) as told in the pdf file.
+
+RELEVANT CODE:
+g.precision(3);
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: smgyl, GitHub ID: smgyl
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

@@ -54,3 +54,17 @@ int CGSolver(std::vector<double> &val,
     }
     return retVal;
 }
+
+//--functionality_0
+//--Passed all tests!
+//--END
+
+//--design_0
+//--Well designed!
+//--END
+
+//--documentation_0
+//--good
+//--END
+
+

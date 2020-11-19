@@ -71,7 +71,11 @@ int main(int argc, char *argv[]){
     //write the solution vector to solution file
     if (g.is_open()){
         g.setf(std::ios::scientific, std::ios::floatfield);
+//--style_0
+//--It should be g.precision(4) as told in the pdf file.
+//--START
         g.precision(3);
+//--END
         for (auto vec: x){
             g << vec << std::endl;
         }
