@@ -1,0 +1,21 @@
+This code implements a C++ image class that can read and write JPEG files and has
+methods to compute the sharpness of the image and smooth(blur) the image using a
+box blur kernel of a specified size.
+
+The image class has a constructor that reads the file and stores the image data as
+an attribute. It also has three methods used for analyzing the image.
+1. Save() method writes the current version of the image to a JPEG file.
+2. BoxBlur() method uses the convolution function to smooth the image with a kernel
+of the given kernel size.
+3. Sharpness() method computes the sharpness of the image
+
+The Convolution function is used to compute the convolution of a given image array with
+a kernel. It creates a buffer array that stores the input image array with the 4 sides
+extended based on the kernel size then carries out the convolution computation with the
+given kernel.
+
+The main file reads the provided grayscale image and computes its sharpness.
+It also blurs the image with successively larger box blur kernels (3,7,...,27),
+outputs the blurred images as JPEG files and computes the sharpness of each blurry
+version of the image.
+
