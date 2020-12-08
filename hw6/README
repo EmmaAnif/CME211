@@ -19,3 +19,6 @@ It also blurs the image with successively larger box blur kernels (3,7,...,27),
 outputs the blurred images as JPEG files and computes the sharpness of each blurry
 version of the image.
 
+//--functionality_0
+//--Passed all tests!
+//--END

@@ -1,0 +1,82 @@
+FILE:          image.cpp
+DESIGN         
+
+COMMENTS:
+-Nice handling of edge cases.
+
+RELEVANT CODE:
+for (int i = 0; i < n_large_row; i++){
+    for (int j = 0; j < n_large_col; j++){
+      int leftmost_col = k_extend, rightmost_col = ncols + k_extend -1;
+      int topmost_row = k_extend, bottomost_row = nrows + k_extend -1;
+      
+      if (i <= topmost_row){ //pixels on top edge
+        if (j <= leftmost_col)
+          buffer[i][j] = input[topmost_row-k_extend][leftmost_col-k_extend];
+        else if(j >= rightmost_col)
+          buffer[i][j] = input[topmost_row-k_extend][rightmost_col-k_extend];
+        else
+          buffer[i][j] = input[topmost_row-k_extend][j-k_extend];
+      }
+      
+      else if (i >= bottomost_row){ //pixels on bottom edge
+        if (j <= leftmost_col)
+          buffer[i][j] = input[bottomost_row-k_extend][leftmost_col-k_extend];
+        else if(j >= rightmost_col)
+          buffer[i][j] = input[bottomost_row-k_extend][rightmost_col-k_extend];
+        else
+          buffer[i][j] = input[bottomost_row-k_extend][j-k_extend];
+      }
+      
+      else if (j <= leftmost_col) //pixels on left edge
+        buffer[i][j] = input[i-k_extend][leftmost_col-k_extend];
+        
+      else if (j >= rightmost_col) //pixels on right edge
+        buffer[i][j] = input[i-k_extend][rightmost_col-k_extend];
+        
+      else //pixels not at the boundaries
+        buffer[i][j] = input[i-k_extend][j-k_extend];
+    }
+  }
+
+                  
+
+
+--------------------------
+FILE:          image.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+FILE:          main.cpp
+FUNCTIONALITY  
+
+COMMENTS:
+-Passed all tests!
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: chkao831, GitHub ID chkao831
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                             +
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

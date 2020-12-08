@@ -33,3 +33,11 @@ int main(void){
   
   return 0;
 }
+
+//--functionality_0
+//--Passed all tests!
+//--END
+
+//--style_0
+//--Nice written inline comments!
+

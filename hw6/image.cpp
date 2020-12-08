@@ -76,6 +76,9 @@ void Convolution(boost::multi_array<unsigned char, 2>& input,
   boost::multi_array<unsigned char,2> buffer(boost::extents[n_large_row]\
   							[n_large_col]);
  
+  //--design_0
+  //--Nice handling of edge cases. 
+  //--START
   for (int i = 0; i < n_large_row; i++){
     for (int j = 0; j < n_large_col; j++){
       int leftmost_col = k_extend, rightmost_col = ncols + k_extend -1;
@@ -109,6 +112,7 @@ void Convolution(boost::multi_array<unsigned char, 2>& input,
         buffer[i][j] = input[i-k_extend][j-k_extend];
     }
   }
+  //--END
   
   //convolution computation
   boost::multi_array<unsigned char,2> in_view(boost::extents[k_size][k_size]);
@@ -137,3 +141,7 @@ void Convolution(boost::multi_array<unsigned char, 2>& input,
     }
   }
 }
+
+//--functionality_0
+//--Passed all tests!
+//--END
