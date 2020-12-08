@@ -88,3 +88,7 @@ int HeatEquation2D::Solve(std::string soln_prefix){
   
   return 0;
 }
+
+//--functionality_0
+//--Passed all tests.
+//--END

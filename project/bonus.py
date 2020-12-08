@@ -85,3 +85,7 @@ if __name__ == "__main__":
     #commandline feedback
     print("Input file processed: " + inputfile)
     print("Output animation created: " + ani_name)
+
+#--functionality_-1
+#--bonus point rewarded
+#--END

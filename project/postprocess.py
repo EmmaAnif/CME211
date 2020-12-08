@@ -78,3 +78,7 @@ if __name__ == "__main__":
     print("Input file processed: " + inputfile)
     print("Mean Temperature: {}".format(round(T_mean,2)))
     print("Output plot created: " + figname)
+
+#--functionality_0
+#--Passed all tests.
+#--END

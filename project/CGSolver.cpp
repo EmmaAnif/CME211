@@ -103,3 +103,7 @@ int CGSolver(std::vector<double> &val,
     }
     return retVal;
 }
+
+//--functionality_0
+//--Passed all tests.
+//--END
